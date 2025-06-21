@@ -23,18 +23,26 @@ class TestAditionalUnitarias {
     }
 
 
-    // Test 2: verifica que cuando el porcentaje de propina es 0%,
-    // la función calculateTip devuelva 0.0, incluso si el redondeo está activado.
+    // Test 2: verifica que cuando el monto de la cuenta (billAmount) es inválido, como un string vacío ("")
+    // la función calculateTip devuelve 0.0 como resultado de la propina.
     @Test
-    fun calculateTip_returnsZero_whenTipPercentageIsZero() {
-        // Ejecutamos la funcion calculateTip con un monto de 100
-        // con porcentaje de propina de 0%
-        // El redondeo esta activado (aunque no influye en nada ya que la propina es 0)
-        val tip = calculateTip(100.0, 0, true)
-        // Verifica que el resultado de la propina sea exactamente 0.0
-        // Esto asegura que incluso con roundUp = true, no se altere el valor 0.0
+    fun calculateTip_returnsZero_whenAmountIsInvalid() {
+        // Simula que el usuario escribió un monto vacío en el campo de texto
+        val billAmount = ""
+
+        // Intenta convertir el monto a Double. Si falla (por ser vacío o no numérico), retorna 0.0
+        // esto simula el comportamiento real del código en la UI con: `val bill = billAmount.toDoubleOrNull() ?: 0.0`
+        val bill = billAmount.toDoubleOrNull() ?: 0.0
+
+        // Llama a la función que calcula la propina con: monto = 0.0 (porque el string era inválido)
+        // porcentaje de propina = 20% sin redondeo
+        val tip = calculateTip(bill, 20, false)
+
+        // Verifica que la propina calculada sea 0.0 ya que el monto no era válido, no debería haber propina alguna
         assertEquals(0.0, tip, 0.0)
     }
+
+
 
 
 }

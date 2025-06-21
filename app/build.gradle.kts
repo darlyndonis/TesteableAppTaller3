@@ -40,9 +40,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.core.testing)
+    implementation(libs.jetbrains.kotlinx.coroutines.test)
+    implementation(libs.androidx.ui.test.junit4.android)
     testImplementation(kotlin("test"))
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
